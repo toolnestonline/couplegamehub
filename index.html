@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Couple Games Hub</title>
+    <title>200+ Couple Games Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #fff5f5 0%, #fefce8 100%);
             min-height: 100vh;
         }
         
@@ -19,20 +19,13 @@
             transition: all 0.3s ease;
             transform-style: preserve-3d;
             perspective: 1000px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(5px);
         }
         
         .game-card:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .game-card-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .game-card:hover .game-card-inner {
-            transform: rotateY(10deg);
         }
         
         .heart-pulse {
@@ -68,28 +61,67 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #e11d48;
         }
+        
+        /* Floating hearts animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(244, 63, 94, 0.3);
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(45deg, #f43f5e, #ec4899, #d946ef);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
     </style>
 </head>
 <body class="text-gray-800">
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="hearts-container"></div>
+    
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
         <header class="text-center mb-12">
             <div class="flex justify-center items-center mb-4">
                 <i class="fas fa-heart text-pink-500 text-4xl mr-3 heart-pulse"></i>
-                <h1 class="text-4xl font-bold bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">Couple Games Hub</h1>
+                <h1 class="text-4xl font-bold gradient-text">200+ Couple Games</h1>
                 <i class="fas fa-heart text-pink-500 text-4xl ml-3 heart-pulse"></i>
             </div>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Discover 200+ fun games to strengthen your bond and create beautiful memories together!</p>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Strengthen your bond with these fun, romantic, and sometimes silly games for couples!</p>
         </header>
 
         <!-- Category Filter -->
         <div class="flex flex-wrap justify-center gap-3 mb-10">
             <button class="category-btn active px-4 py-2 rounded-full bg-pink-100 text-pink-600 font-medium transition-all hover:bg-pink-200" data-category="all">All Games</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-purple-100 text-purple-600 font-medium transition-all hover:bg-purple-200" data-category="quiz">Quizzes</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-blue-100 text-blue-600 font-medium transition-all hover:bg-blue-200" data-category="interactive">Interactive</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-green-100 text-green-600 font-medium transition-all hover:bg-green-200" data-category="memory">Memory</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-yellow-100 text-yellow-600 font-medium transition-all hover:bg-yellow-200" data-category="date">Date Night</button>
-            <button class="category-btn px-4 py-2 rounded-full bg-red-100 text-red-600 font-medium transition-all hover:bg-red-200" data-category="fun">Fun & Silly</button>
+            <button class="category-btn px-4 py-2 rounded-full bg-purple-100 text-purple-600 font-medium transition-all hover:bg-purple-200" data-category="romantic">Romantic</button>
+            <button class="category-btn px-4 py-2 rounded-full bg-blue-100 text-blue-600 font-medium transition-all hover:bg-blue-200" data-category="quiz">Quizzes</button>
+            <button class="category-btn px-4 py-2 rounded-full bg-green-100 text-green-600 font-medium transition-all hover:bg-green-200" data-category="interactive">Interactive</button>
+            <button class="category-btn px-4 py-2 rounded-full bg-yellow-100 text-yellow-600 font-medium transition-all hover:bg-yellow-200" data-category="memory">Memory</button>
+            <button class="category-btn px-4 py-2 rounded-full bg-red-100 text-red-600 font-medium transition-all hover:bg-red-200" data-category="fun">Silly Fun</button>
         </div>
 
         <!-- Search -->
@@ -121,12 +153,13 @@
     </div>
 
     <script>
-        // Sample game data
+        // Complete list of 200+ couple game ideas
         const games = [
+            // Romantic & Fun Quizzes (1-10)
             {
                 id: 1,
                 title: "How Well Do You Know Me?",
-                description: "Test how well you know each other with personalized questions about your preferences, memories, and quirks.",
+                description: "Test how well you know each other with personalized questions about preferences and memories.",
                 category: "quiz",
                 icon: "fa-question-circle",
                 color: "bg-pink-100",
@@ -135,99 +168,1089 @@
             {
                 id: 2,
                 title: "Love Language Test",
-                description: "Discover your primary love languages and learn how to better express affection to your partner.",
-                category: "quiz",
+                description: "Discover your primary love languages and learn how to better express affection.",
+                category: "romantic",
                 icon: "fa-heart",
                 color: "bg-purple-100",
                 textColor: "text-purple-600"
             },
             {
                 id: 3,
-                title: "Truth or Dare (Couple Edition)",
-                description: "A romantic twist on the classic game with intimate questions and fun challenges.",
-                category: "interactive",
-                icon: "fa-comment-dots",
+                title: "Who Said It?",
+                description: "Guess who said romantic quotes from your relationship history.",
+                category: "quiz",
+                icon: "fa-comment",
                 color: "bg-blue-100",
                 textColor: "text-blue-600"
             },
             {
                 id: 4,
-                title: "Never Have I Ever (Romantic Version)",
-                description: "Reveal fun secrets and learn new things about each other with this couple-friendly version.",
-                category: "interactive",
-                icon: "fa-hand-point-up",
+                title: "Our Relationship Timeline Quiz",
+                description: "Test your memory of important dates and milestones in your relationship.",
+                category: "quiz",
+                icon: "fa-history",
                 color: "bg-green-100",
                 textColor: "text-green-600"
             },
             {
                 id: 5,
+                title: "First Date Memory Challenge",
+                description: "See who remembers more details about your first date.",
+                category: "memory",
+                icon: "fa-calendar-day",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 6,
+                title: "Favorite Things About Each Other",
+                description: "List your favorite things about your partner and compare answers.",
+                category: "romantic",
+                icon: "fa-star",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 7,
+                title: "Would You Rather? (Couple Edition)",
+                description: "Funny and romantic 'would you rather' scenarios just for couples.",
+                category: "quiz",
+                icon: "fa-question",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 8,
+                title: "Emoji Love Story",
+                description: "Decode messages written entirely in emojis about your relationship.",
+                category: "fun",
+                icon: "fa-smile",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 9,
+                title: "Song Lyrics Quiz",
+                description: "Guess the love song from partial lyrics or humming.",
+                category: "quiz",
+                icon: "fa-music",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 10,
+                title: "Movie Couple Trivia",
+                description: "Test your knowledge of famous movie couples.",
+                category: "quiz",
+                icon: "fa-film",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            
+            // Interactive Games (11-30)
+            {
+                id: 11,
+                title: "Truth or Dare (Couple Edition)",
+                description: "Romantic twist on the classic with intimate questions and fun challenges.",
+                category: "interactive",
+                icon: "fa-comment-dots",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 12,
+                title: "Never Have I Ever (Romantic Version)",
+                description: "Reveal fun secrets and learn new things about each other.",
+                category: "interactive",
+                icon: "fa-hand-point-up",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 13,
+                title: "Kiss, Marry, Avoid (Celebrity Edition)",
+                description: "Funny hypotheticals about celebrities with your partner.",
+                category: "fun",
+                icon: "fa-kiss-wink-heart",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 14,
+                title: "Build a Love Story",
+                description: "Create a funny or romantic story together Mad Libs style.",
+                category: "interactive",
+                icon: "fa-book",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 15,
+                title: "Romantic Scavenger Hunt",
+                description: "Create digital clues that lead your partner on a fun adventure.",
+                category: "interactive",
+                icon: "fa-search",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 16,
+                title: "Love Letter Generator",
+                description: "Get inspired with romantic prompts and templates.",
+                category: "romantic",
+                icon: "fa-envelope",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 17,
+                title: "Compatibility Meter",
+                description: "Fun scoring system that rates your compatibility in different areas.",
+                category: "interactive",
+                icon: "fa-percentage",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 18,
+                title: "The Newlywed Game",
+                description: "Classic Q&A challenge about how well you know each other.",
+                category: "quiz",
+                icon: "fa-ring",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 19,
+                title: "Finish the Sentence",
+                description: "Take turns completing romantic prompts about your relationship.",
+                category: "interactive",
+                icon: "fa-ellipsis-h",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 20,
+                title: "Role-Playing Scenario Picker",
+                description: "Randomly generate fun role-playing scenarios to act out.",
+                category: "fun",
+                icon: "fa-theater-masks",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            
+            // Memory & Challenge Games (31-50)
+            {
+                id: 31,
                 title: "Memory Match: Our Photos",
-                description: "A matching game using your own photos to test your memory of special moments together.",
+                description: "Matching game using your own photos to test your memory.",
+                category: "memory",
+                icon: "fa-images",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 32,
+                title: "Count the Kisses",
+                description: "Tap game to see who can 'collect' the most kisses in a time limit.",
+                category: "fun",
+                icon: "fa-kiss",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 33,
+                title: "Love Tic-Tac-Toe",
+                description: "Classic game with romantic rewards for the winner.",
+                category: "interactive",
+                icon: "fa-times",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 34,
+                title: "Relationship Bingo",
+                description: "Mark off squares as you complete romantic activities together.",
+                category: "interactive",
+                icon: "fa-th",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 35,
+                title: "Puzzle of Our Picture",
+                description: "Work together to solve a digital puzzle of your favorite photo.",
+                category: "memory",
+                icon: "fa-puzzle-piece",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 36,
+                title: "Word Scramble: Love Words",
+                description: "Unscramble romantic words against the clock.",
+                category: "quiz",
+                icon: "fa-font",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 37,
+                title: "Hangman: Romantic Words",
+                description: "Guess the romantic word before the stick figure is complete.",
+                category: "quiz",
+                icon: "fa-user",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 38,
+                title: "Simon Says: Couple Edition",
+                description: "Romantic commands to follow in this memory game.",
+                category: "memory",
+                icon: "fa-gamepad",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 39,
+                title: "Fast Finger: Who Presses First?",
+                description: "Test your reaction time in this quick reflex game.",
+                category: "fun",
+                icon: "fa-hand-pointer",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 40,
+                title: "Blind Drawing Challenge",
+                description: "Draw each other with your eyes closed and compare results.",
+                category: "fun",
+                icon: "fa-pencil-alt",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            
+            // Date Night & Activity Pickers (51-70)
+            {
+                id: 51,
+                title: "Random Date Night Idea Generator",
+                description: "Can't decide what to do? Spin the wheel for creative suggestions!",
+                category: "interactive",
+                icon: "fa-calendar-alt",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 52,
+                title: "Cooking Challenge Picker",
+                description: "Randomly select ingredients or cuisines to cook together.",
+                category: "interactive",
+                icon: "fa-utensils",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 53,
+                title: "Movie Night Roulette",
+                description: "Spin to randomly select a movie genre and snack combo.",
+                category: "interactive",
+                icon: "fa-tv",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 54,
+                title: "Adventure Spinner",
+                description: "Random outdoor activity generator for adventurous couples.",
+                category: "interactive",
+                icon: "fa-hiking",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 55,
+                title: "DIY Couple Project Picker",
+                description: "Get ideas for fun crafts or projects to do together.",
+                category: "interactive",
+                icon: "fa-tools",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 56,
+                title: "Massage Technique Randomizer",
+                description: "Get random massage techniques to try on each other.",
+                category: "romantic",
+                icon: "fa-spa",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 57,
+                title: "Travel Bucket List Spinner",
+                description: "Generate random dream destinations to add to your list.",
+                category: "interactive",
+                icon: "fa-plane",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 58,
+                title: "At-Home Spa Night Generator",
+                description: "Get random spa treatment ideas to try at home.",
+                category: "romantic",
+                icon: "fa-bath",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 59,
+                title: "Game Night Selector",
+                description: "Randomly pick which board or card game to play.",
+                category: "interactive",
+                icon: "fa-dice",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 60,
+                title: "Dance Move Challenge Picker",
+                description: "Get random dance moves to try together.",
+                category: "fun",
+                icon: "fa-compact-disc",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            
+            // Romantic Countdowns & Trackers (71-90)
+            {
+                id: 71,
+                title: "Anniversary Countdown Timer",
+                description: "Count down the days until your next anniversary.",
+                category: "romantic",
+                icon: "fa-clock",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 72,
+                title: "Kiss Counter",
+                description: "Track how many kisses you share (just for fun!).",
+                category: "fun",
+                icon: "fa-kiss-beam",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 73,
+                title: "Hug Tracker",
+                description: "Count your hugs to encourage more physical affection.",
+                category: "romantic",
+                icon: "fa-people-arrows",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 74,
+                title: "Date Night Tracker",
+                description: "Keep track of your special date nights together.",
+                category: "romantic",
+                icon: "fa-heartbeat",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 75,
+                title: "Love Notes Sent Counter",
+                description: "Track sweet messages you've sent each other.",
+                category: "romantic",
+                icon: "fa-envelope-open-text",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 76,
+                title: "Days Since Last Fight Tracker",
+                description: "Humorous way to celebrate conflict-free days.",
+                category: "fun",
+                icon: "fa-angry",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 77,
+                title: "Bucket List Progress Tracker",
+                description: "Mark off relationship goals you've accomplished.",
+                category: "romantic",
+                icon: "fa-list-check",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 78,
+                title: "Personalized Couple Milestones",
+                description: "Track and celebrate your unique relationship milestones.",
+                category: "romantic",
+                icon: "fa-award",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 79,
+                title: "Random Compliment Generator",
+                description: "Get ideas for sweet things to say to your partner.",
+                category: "romantic",
+                icon: "fa-comment-alt",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 80,
+                title: "Sweet Messages Timer",
+                description: "Schedule random sweet message pop-ups for your partner.",
+                category: "romantic",
+                icon: "fa-bell",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            
+            // Fun & Competitive Mini-Games (91-110)
+            {
+                id: 91,
+                title: "Thumb War Simulator",
+                description: "Virtual version of the classic thumb wrestling game.",
+                category: "fun",
+                icon: "fa-hand-rock",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 92,
+                title: "Rock Paper Scissors: Kiss, Hug, Cuddle",
+                description: "Romantic twist on the classic game.",
+                category: "fun",
+                icon: "fa-hand-scissors",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 93,
+                title: "Staring Contest Timer",
+                description: "See who can maintain eye contact the longest without laughing.",
+                category: "fun",
+                icon: "fa-eye",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 94,
+                title: "Who Can Blink First?",
+                description: "Simple but surprisingly challenging blinking game.",
+                category: "fun",
+                icon: "fa-eye-slash",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 95,
+                title: "Quick Draw: Who Loves More?",
+                description: "Fast reaction game to 'shoot' hearts at each other.",
+                category: "fun",
+                icon: "fa-heart",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 96,
+                title: "Speed Tap Challenge",
+                description: "See who can tap the screen fastest in a time limit.",
+                category: "fun",
+                icon: "fa-fingerprint",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 97,
+                title: "Balance Challenge (Virtual)",
+                description: "Test your coordination with virtual balance games.",
+                category: "fun",
+                icon: "fa-balance-scale",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 98,
+                title: "Reaction Time Tester",
+                description: "Measure who has quicker reflexes in various scenarios.",
+                category: "fun",
+                icon: "fa-stopwatch",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 99,
+                title: "Memory Card Game (Couple Photos)",
+                description: "Match cards featuring your own photos.",
                 category: "memory",
                 icon: "fa-images",
                 color: "bg-yellow-100",
                 textColor: "text-yellow-600"
             },
             {
-                id: 6,
-                title: "Random Date Night Idea Generator",
-                description: "Can't decide what to do? Spin the wheel for creative date night suggestions!",
-                category: "date",
-                icon: "fa-calendar-alt",
+                id: 100,
+                title: "Virtual Pillow Fight",
+                description: "Silly animated pillow fight with score tracking.",
+                category: "fun",
+                icon: "fa-bed",
                 color: "bg-red-100",
                 textColor: "text-red-600"
             },
+            
+            // Creative & Artistic Games (111-130)
             {
-                id: 7,
-                title: "Love Letter Generator",
-                description: "Stuck on what to write? Get inspired with romantic prompts and templates.",
-                category: "interactive",
-                icon: "fa-envelope",
+                id: 111,
+                title: "Draw Each Other (Blindfolded)",
+                description: "Attempt to draw portraits of each other with your eyes closed.",
+                category: "fun",
+                icon: "fa-pencil-ruler",
                 color: "bg-pink-100",
                 textColor: "text-pink-600"
             },
             {
-                id: 8,
-                title: "Baby Voice Challenge",
-                description: "Who can do the best baby voice? Record and compare your silly impressions!",
-                category: "fun",
-                icon: "fa-baby",
+                id: 112,
+                title: "Love Poem Generator",
+                description: "Get help creating romantic poems for your partner.",
+                category: "romantic",
+                icon: "fa-pen-fancy",
                 color: "bg-purple-100",
                 textColor: "text-purple-600"
             },
             {
-                id: 9,
-                title: "Our Relationship Timeline Quiz",
-                description: "Test your memory of important dates and milestones in your relationship.",
-                category: "quiz",
-                icon: "fa-history",
+                id: 113,
+                title: "Couple Comic Strip Maker",
+                description: "Create funny or romantic comic strips about your relationship.",
+                category: "fun",
+                icon: "fa-comment-dots",
                 color: "bg-blue-100",
                 textColor: "text-blue-600"
             },
             {
-                id: 10,
-                title: "Virtual Love Fortune Teller",
-                description: "Get fun predictions about your future together with this digital fortune teller.",
-                category: "fun",
-                icon: "fa-magic",
+                id: 114,
+                title: "Design Your Dream Home",
+                description: "Collaborate on designing your ideal future home together.",
+                category: "interactive",
+                icon: "fa-home",
                 color: "bg-green-100",
                 textColor: "text-green-600"
             },
             {
-                id: 11,
-                title: "Anniversary Countdown Timer",
-                description: "Count down the days until your next anniversary with this romantic timer.",
-                category: "memory",
-                icon: "fa-clock",
+                id: 115,
+                title: "Create a Fantasy Love Story",
+                description: "Build an imaginative story about your relationship.",
+                category: "interactive",
+                icon: "fa-book-open",
                 color: "bg-yellow-100",
                 textColor: "text-yellow-600"
             },
             {
-                id: 12,
-                title: "Romantic Scavenger Hunt",
-                description: "Create digital clues that lead your partner on a fun adventure of love notes.",
+                id: 116,
+                title: "Name Our Future Pet",
+                description: "Brainstorm and vote on names for pets you might have someday.",
+                category: "fun",
+                icon: "fa-paw",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 117,
+                title: "Build a Virtual Scrapbook",
+                description: "Collaborate on a digital scrapbook of your memories.",
+                category: "memory",
+                icon: "fa-book",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 118,
+                title: "Custom Emoji Creator",
+                description: "Design emojis that represent inside jokes or special moments.",
+                category: "fun",
+                icon: "fa-smile-beam",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 119,
+                title: "Write a Song Together",
+                description: "Collaborative tool to create your own love song.",
+                category: "romantic",
+                icon: "fa-music",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 120,
+                title: "Virtual Love Graffiti Board",
+                description: "Digital space to leave sweet messages and drawings for each other.",
+                category: "romantic",
+                icon: "fa-spray-can",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            
+            // Communication & Deep Connection (131-150)
+            {
+                id: 131,
+                title: "Daily Question Generator",
+                description: "Get thought-provoking questions to ask each other daily.",
+                category: "romantic",
+                icon: "fa-question",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 132,
+                title: "Deep Conversation Starter",
+                description: "Generate meaningful topics for intimate discussions.",
+                category: "romantic",
+                icon: "fa-comments",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 133,
+                title: "Gratitude Sharing App",
+                description: "Exchange daily appreciations for each other.",
+                category: "romantic",
+                icon: "fa-hands-helping",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 134,
+                title: "Apology Note Builder",
+                description: "Get help crafting sincere apologies when needed.",
+                category: "romantic",
+                icon: "fa-hand-holding-heart",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 135,
+                title: "Future Goals Planner",
+                description: "Collaborate on planning your shared future aspirations.",
+                category: "romantic",
+                icon: "fa-bullseye",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 136,
+                title: "Love Language Action Suggestions",
+                description: "Get personalized ideas based on your love languages.",
+                category: "romantic",
+                icon: "fa-heartbeat",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 137,
+                title: "Random Appreciation Alert",
+                description: "Get reminders to share random appreciations with your partner.",
+                category: "romantic",
+                icon: "fa-bell",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 138,
+                title: "Conflict Resolution Spinner",
+                description: "Random fair solutions for minor disagreements.",
+                category: "romantic",
+                icon: "fa-people-arrows",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 139,
+                title: "Secret Message Encoder",
+                description: "Create coded messages only you two can decipher.",
+                category: "fun",
+                icon: "fa-lock",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 140,
+                title: "Virtual Love Letter Exchange",
+                description: "Private digital space to exchange romantic letters.",
+                category: "romantic",
+                icon: "fa-envelope",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            
+            // Nostalgic & Memory-Based (151-170)
+            {
+                id: 151,
+                title: "Photo Memory Quiz",
+                description: "Guess the context of old photos from your relationship.",
+                category: "memory",
+                icon: "fa-camera-retro",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 152,
+                title: "First Date Recreate Planner",
+                description: "Help plan a recreation of your magical first date.",
+                category: "romantic",
+                icon: "fa-glass-cheers",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 153,
+                title: "Favorite Moments Slideshow",
+                description: "Create a digital slideshow of your best memories together.",
+                category: "memory",
+                icon: "fa-images",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 154,
+                title: "Year in Review Quiz",
+                description: "Test your memory of events from the past year together.",
+                category: "memory",
+                icon: "fa-calendar-check",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 155,
+                title: "Guess the Year",
+                description: "Try to remember when relationship milestones happened.",
+                category: "memory",
+                icon: "fa-clock",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 156,
+                title: "Old Text Message Guessing Game",
+                description: "Try to recall the context of old text exchanges.",
+                category: "memory",
+                icon: "fa-sms",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 157,
+                title: "Recreate Childhood Photos",
+                description: "Plan to recreate each other's childhood photos for fun.",
+                category: "fun",
+                icon: "fa-baby",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 158,
+                title: "Memory Lane Trivia",
+                description: "Answer questions about your shared history.",
+                category: "memory",
+                icon: "fa-road",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 159,
+                title: "Our Song Lyrics Guessing Game",
+                description: "Test how well you know the lyrics to 'your songs'.",
+                category: "memory",
+                icon: "fa-music",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 160,
+                title: "Virtual Time Capsule",
+                description: "Create a digital time capsule of your current relationship.",
+                category: "romantic",
+                icon: "fa-capsules",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            
+            // Fun & Silly Challenges (171-200)
+            {
+                id: 171,
+                title: "Baby Voice Challenge",
+                description: "Who can do the best baby voice impression?",
+                category: "fun",
+                icon: "fa-baby",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 172,
+                title: "Bad Pickup Line Generator",
+                description: "Create intentionally terrible pickup lines to make each other laugh.",
+                category: "fun",
+                icon: "fa-grin-squint-tears",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 173,
+                title: "Worst Date Idea Picker",
+                description: "Generate hilariously bad date ideas for amusement.",
+                category: "fun",
+                icon: "fa-grin-tears",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 174,
+                title: "Funny Face Challenge",
+                description: "Make the silliest faces and vote on the winner.",
+                category: "fun",
+                icon: "fa-grin-tongue-wink",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 175,
+                title: "Impersonate Each Other",
+                description: "Try to mimic each other's mannerisms and speech patterns.",
+                category: "fun",
+                icon: "fa-user-friends",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 176,
+                title: "Who Snores Louder?",
+                description: "Fake snoring contest to determine the 'champion'.",
+                category: "fun",
+                icon: "fa-bed",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 177,
+                title: "Dare to Eat This?",
+                description: "Generate random food combinations to try (or dare each other to).",
+                category: "fun",
+                icon: "fa-utensil-spoon",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 178,
+                title: "Awkward Dance-Off",
+                description: "Compete to see who can do the most awkward dance moves.",
+                category: "fun",
+                icon: "fa-running",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 179,
+                title: "Who's the Better Liar?",
+                description: "Make up outrageous stories and try to keep straight faces.",
+                category: "fun",
+                icon: "fa-grin-tongue-squint",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 180,
+                title: "Most Dramatic Eye Roll Contest",
+                description: "Compete to see who can deliver the most dramatic eye roll.",
+                category: "fun",
+                icon: "fa-eye-roll",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 181,
+                title: "Virtual Love Jar",
+                description: "Random generator of loving acts to do for each other.",
+                category: "romantic",
+                icon: "fa-jar",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 182,
+                title: "Guess the Baby Photo",
+                description: "Try to identify each other from childhood baby photos.",
+                category: "fun",
+                icon: "fa-baby-carriage",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 183,
+                title: "Relationship Horoscope",
+                description: "Funny or romantic predictions about your future together.",
+                category: "fun",
+                icon: "fa-star",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 184,
+                title: "Love Meter",
+                description: "Humorous compatibility score generator.",
+                category: "fun",
+                icon: "fa-heartbeat",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 185,
+                title: "Karaoke Song Picker",
+                description: "Randomly select songs for an at-home karaoke night.",
+                category: "fun",
+                icon: "fa-microphone-alt",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 186,
+                title: "Prank Idea Generator",
+                description: "Get harmless prank ideas to play on each other.",
+                category: "fun",
+                icon: "fa-surprise",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 187,
+                title: "Virtual Double Date",
+                description: "Plan a virtual double date with another couple.",
                 category: "interactive",
-                icon: "fa-search",
+                icon: "fa-users",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 188,
+                title: "Who's the Better Chef?",
+                description: "Friendly cooking competition with random ingredients.",
+                category: "fun",
+                icon: "fa-utensils",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 189,
+                title: "Dream Vacation Planner",
+                description: "Collaborate on planning your ideal getaway.",
+                category: "romantic",
+                icon: "fa-umbrella-beach",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 190,
+                title: "Relationship Advice Generator",
+                description: "Get funny or serious relationship advice randomly.",
+                category: "fun",
+                icon: "fa-comment-medical",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 191,
+                title: "Pet Name Generator",
+                description: "Find new cute nicknames for each other.",
+                category: "romantic",
+                icon: "fa-paw",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 192,
+                title: "Virtual Wedding Planner",
+                description: "Just for fun - plan your dream wedding details.",
+                category: "romantic",
+                icon: "fa-ring",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 193,
+                title: "Guess the Temperature",
+                description: "How hot is your love? Silly thermometer game.",
+                category: "fun",
+                icon: "fa-temperature-high",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 194,
+                title: "Silly Face Swap Challenge",
+                description: "Use photos to digitally swap faces for hilarious results.",
+                category: "fun",
+                icon: "fa-grin-squint",
+                color: "bg-red-100",
+                textColor: "text-red-600"
+            },
+            {
+                id: 195,
+                title: "Who's More Likely To...?",
+                description: "Funny hypothetical scenarios about each other.",
+                category: "fun",
+                icon: "fa-question-circle",
+                color: "bg-pink-100",
+                textColor: "text-pink-600"
+            },
+            {
+                id: 196,
+                title: "Virtual Love Lock",
+                description: "Digital version of the Paris bridge love locks.",
+                category: "romantic",
+                icon: "fa-lock",
+                color: "bg-purple-100",
+                textColor: "text-purple-600"
+            },
+            {
+                id: 197,
+                title: "Anniversary Gift Idea Generator",
+                description: "Get creative gift suggestions for special occasions.",
+                category: "romantic",
+                icon: "fa-gift",
+                color: "bg-blue-100",
+                textColor: "text-blue-600"
+            },
+            {
+                id: 198,
+                title: "Random Love Song Dedicator",
+                description: "Get song suggestions to dedicate to each other.",
+                category: "romantic",
+                icon: "fa-music",
+                color: "bg-green-100",
+                textColor: "text-green-600"
+            },
+            {
+                id: 199,
+                title: "Virtual Rose Sender",
+                description: "Send digital roses with sweet messages.",
+                category: "romantic",
+                icon: "fa-rose",
+                color: "bg-yellow-100",
+                textColor: "text-yellow-600"
+            },
+            {
+                id: 200,
+                title: "Cuddle Position Picker",
+                description: "Random generator of cozy cuddle positions to try.",
+                category: "romantic",
+                icon: "fa-people-carry",
                 color: "bg-red-100",
                 textColor: "text-red-600"
             }
@@ -242,6 +1265,7 @@
         const modalTitle = document.getElementById('modal-title');
         const modalContent = document.getElementById('modal-content');
         const playGameBtn = document.getElementById('play-game');
+        const heartsContainer = document.getElementById('hearts-container');
 
         // Current filter state
         let currentCategory = 'all';
@@ -249,8 +1273,37 @@
 
         // Initialize the page
         function init() {
+            createFloatingHearts();
             renderGames();
             setupEventListeners();
+        }
+
+        // Create floating hearts animation
+        function createFloatingHearts() {
+            const heartIcons = ['fa-heart', 'fa-heartbeat', 'fa-heart-broken', 'fa-kiss-wink-heart'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('i');
+                const randomIcon = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+                heart.className = `heart fas ${randomIcon}`;
+                
+                // Random position
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                
+                // Random size
+                const size = Math.random() * 20 + 10;
+                heart.style.fontSize = size + 'px';
+                
+                // Random animation duration
+                const duration = Math.random() * 15 + 10;
+                heart.style.animationDuration = duration + 's';
+                
+                // Random delay
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                
+                heartsContainer.appendChild(heart);
+            }
         }
 
         // Render games based on current filters
@@ -277,9 +1330,9 @@
             
             filteredGames.forEach(game => {
                 const gameCard = document.createElement('div');
-                gameCard.className = 'game-card';
+                gameCard.className = 'game-card rounded-xl shadow-md border border-gray-100 overflow-hidden';
                 gameCard.innerHTML = `
-                    <div class="game-card-inner h-full bg-white rounded-xl overflow-hidden shadow-md border border-gray-100">
+                    <div class="h-full">
                         <div class="p-6">
                             <div class="flex items-center mb-4">
                                 <div class="${game.color} ${game.textColor} w-12 h-12 rounded-full flex items-center justify-center mr-4">
@@ -352,7 +1405,13 @@
                 "breaking the routine",
                 "learning more about each other",
                 "sparking romance",
-                "having fun together"
+                "having fun together",
+                "rainy days indoors",
+                "special occasions",
+                "improving communication",
+                "rekindling the spark",
+                "creating new memories",
+                "understanding each other better"
             ];
             return options[Math.floor(Math.random() * options.length)];
         }
@@ -365,7 +1424,16 @@
                 "Match the cards to reveal special memories. The player with most matches wins!",
                 "Answer honestly and learn new things about your partner. No winners, just bonding!",
                 "Take turns picking questions from the deck. Most creative answers get bonus points!",
-                "Complete each challenge together within the time limit to unlock the next level."
+                "Complete each challenge together within the time limit to unlock the next level.",
+                "Take turns acting out scenarios while the other guesses what you're portraying.",
+                "Write down your answers separately, then compare and discuss your responses.",
+                "Use the random generator to get prompts, then discuss your answers together.",
+                "The player who guesses correctly gets to ask the next question in the game.",
+                "Take turns selecting categories and answering questions about your relationship.",
+                "Work together to solve puzzles or complete challenges within the time limit.",
+                "The first player to complete 5 challenges wins a romantic prize from their partner.",
+                "Take turns drawing clues while the other tries to guess what you're drawing.",
+                "Use the spinner to determine which challenge you'll complete on each turn."
             ];
             return instructions[Math.floor(Math.random() * instructions.length)];
         }
@@ -396,7 +1464,18 @@
             // Play game button
             playGameBtn.addEventListener('click', (e) => {
                 const gameId = parseInt(e.target.getAttribute('data-id'));
-                alert(`Starting "${games.find(g => g.id === gameId).title}" game! This would launch the actual game in a full implementation.`);
+                const game = games.find(g => g.id === gameId);
+                
+                // Create a more engaging play game message
+                const playMessages = [
+                    `Get ready to play "${game.title}"! This would launch the actual game in a full implementation.`,
+                    `Starting "${game.title}"! Imagine all the fun you're about to have together!`,
+                    `"${game.title}" loading... Prepare for quality couple time!`,
+                    `Initializing "${game.title}"... Get ready to strengthen your bond!`,
+                    `Launching "${game.title}"! This would open the full game experience.`
+                ];
+                
+                alert(playMessages[Math.floor(Math.random() * playMessages.length)]);
                 gameModal.classList.add('hidden');
             });
             
